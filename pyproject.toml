@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sightql"
+version = "0.1.0"
+description = "Compile Amazon QuickSight calculated expressions into SQL across multiple database dialects."
+readme = "README.md"
+requires-python = ">=3.13"
+license = "MIT"
+authors = [
+  { name = "Infera Cognix Labs" },
+]
+keywords = ["quicksight", "sql", "transpiler", "aws"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Database",
+  "Typing :: Typed",
+]
+dependencies = [
+  "lark==1.3.1",
+  "sqlglot==30.18.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.8.0",
+  "mypy>=1.11.0",
+  "build>=1.2.0",
+  "twine>=5.0.0",
+]
+
+[project.scripts]
+sightql = "sightql.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/1_CHI-NOT-CHESE/sightql"
+Issues = "https://github.com/1_CHI-NOT-CHESE/sightql/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sightql"]
+
+[tool.hatch.build.targets.sdist]
+packages = ["src/sightql"]
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.mypy]
+python_version = "3.13"
+strict = true
+warn_unreachable = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
